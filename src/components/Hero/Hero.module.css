@@ -1,0 +1,210 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  padding: clamp(92px, 13vh, 150px) var(--page-gutter) 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  --art-height: min(118vh, 980px);
+  --art-width: calc(var(--art-height) * 720 / 937);
+  --art-right: var(--page-gutter);
+}
+
+.ambientGlow {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(38% 34% at 6% -6%, rgba(242, 116, 93, 0.55), transparent 70%),
+    radial-gradient(46% 42% at 16% -4%, rgba(72, 107, 205, 0.75), transparent 72%),
+    radial-gradient(30% 30% at 2% 24%, rgba(72, 107, 205, 0.25), transparent 70%);
+  filter: blur(8px);
+}
+
+.crossArt {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  right: var(--art-right);
+  height: var(--art-height);
+  width: var(--art-width);
+  transform: translateY(-52%);
+}
+
+.smileyAnchor {
+  position: absolute;
+  z-index: -1;
+  left: calc(100% - var(--art-right) - var(--art-width) * 0.21);
+  top: calc(50% + var(--art-height) * 0.02);
+  width: calc(var(--art-width) * 0.405);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  animation: smileyArrive 1.2s 0.9s var(--ease-smooth) both;
+}
+
+@keyframes smileyArrive {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.4) rotate(-40deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0);
+  }
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(16px, 2.6vh, 28px);
+  width: min(100%, var(--page-width));
+  margin: auto;
+  padding-bottom: clamp(28px, 6vh, 72px);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(52px, min(10.5vw, 12vh), 148px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.titleAccent {
+  width: fit-content;
+  background: linear-gradient(100deg, var(--devx-blue-glow) 0%, var(--devx-blue-soft) 55%, var(--cl-paper) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline {
+  max-width: 500px;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--cl-paper);
+}
+
+.facts {
+  margin-top: -12px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--devx-muted);
+}
+
+.factItem {
+  white-space: nowrap;
+}
+
+.ctaRow {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(14px, 2.2vh, 22px);
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 30px;
+  border-radius: var(--radius-button);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.45;
+  transition: transform 0.25s var(--ease-smooth), background 0.25s, border-color 0.25s, color 0.25s;
+}
+
+.primaryAction {
+  background: var(--cl-paper);
+  color: var(--cl-ink);
+}
+
+.secondaryAction {
+  border: 1px solid var(--devx-line);
+  color: var(--cl-paper);
+}
+
+@media (hover: hover) {
+  .primaryAction:hover {
+    background: var(--cl-sun);
+    transform: translateY(-2px);
+  }
+
+  .secondaryAction:hover {
+    border-color: var(--devx-blue);
+    color: var(--devx-blue);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 900px) {
+  .crossArt {
+    --art-height: 70vh;
+    top: 120px;
+    right: -30%;
+    transform: none;
+    opacity: 0.22;
+  }
+
+  .smileyAnchor {
+    left: calc(100% - var(--page-gutter) - 48px);
+    top: 190px;
+    width: 96px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding-top: 140px;
+    min-height: 0;
+  }
+
+  .content {
+    gap: 22px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+
+  .tagline,
+  .primaryAction,
+  .secondaryAction {
+    font-size: 17px;
+  }
+
+  .facts {
+    margin-top: -10px;
+  }
+
+  .actions {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .ctaRow {
+    align-items: stretch;
+  }
+
+  .primaryAction,
+  .secondaryAction {
+    flex: 1 1 0;
+    padding: 14px 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+}

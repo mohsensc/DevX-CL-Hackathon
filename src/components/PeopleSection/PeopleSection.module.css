@@ -1,0 +1,176 @@
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.profileCard,
+.organizerCard {
+  position: relative;
+  padding: 30px;
+  border: 1px solid var(--cl-ink);
+  border-radius: var(--radius-card);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.profileCard {
+  background: var(--cl-sky);
+  overflow: hidden;
+}
+
+.profileSun {
+  position: absolute;
+  right: -10px;
+  bottom: -14px;
+}
+
+.cardTitle {
+  font-weight: 900;
+  font-size: 24px;
+}
+
+.profileList {
+  margin-top: 18px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+}
+
+.profileList li {
+  display: flex;
+  gap: 12px;
+  font-size: 17px;
+  line-height: 1.4;
+}
+
+.profileList li::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border: 1.5px solid var(--cl-ink);
+  border-radius: 50%;
+  background: var(--cl-sun);
+}
+
+.organizerCard {
+  background: var(--devx-night);
+  color: var(--cl-paper);
+  border-color: var(--devx-night);
+  overflow: hidden;
+}
+
+.organizerCard::before {
+  content: '';
+  position: absolute;
+  inset: -40% -20% auto auto;
+  width: 70%;
+  height: 90%;
+  background: radial-gradient(closest-side, rgba(72, 107, 205, 0.45), transparent);
+  pointer-events: none;
+}
+
+.organizerMarks {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.devxMark {
+  width: 52px;
+  height: 52px;
+  margin: -6px;
+}
+
+.organizerCard .cardTitle {
+  position: relative;
+}
+
+.markCross {
+  color: var(--devx-muted);
+}
+
+.organizerBody {
+  position: relative;
+  margin-top: 12px;
+  font-family: var(--font-devx);
+  font-size: 16px;
+  line-height: 1.6;
+  color: #d6d7dc;
+}
+
+.shipped {
+  position: relative;
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--devx-line);
+  font-family: var(--font-devx);
+}
+
+.shippedLabel {
+  font-size: 13px;
+  color: var(--devx-muted);
+}
+
+.appList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: 6px;
+  list-style: none;
+}
+
+.app {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #d6d7dc;
+  transition: color 0.25s;
+}
+
+.appIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+@media (hover: hover) {
+  .app:hover {
+    color: var(--cl-paper);
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .layout {
+    gap: 20px;
+    margin-top: 28px;
+  }
+
+  .profileCard,
+  .organizerCard {
+    padding: 22px 20px;
+  }
+
+  .profileList {
+    padding-right: 48px;
+  }
+
+  .app {
+    min-height: 44px;
+  }
+}

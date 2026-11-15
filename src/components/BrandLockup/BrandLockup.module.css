@@ -1,0 +1,45 @@
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.clubLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  transition: opacity 0.25s;
+}
+
+@media (hover: hover) {
+  .clubLink:hover {
+    opacity: 0.75;
+  }
+}
+
+.devxMark {
+  width: 34px;
+  height: 34px;
+  margin: -4px;
+}
+
+.devxName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -0.01em;
+}
+
+.cross {
+  color: var(--devx-muted);
+  font-size: 15px;
+}
+
+.clName {
+  font-family: var(--font-cl);
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}

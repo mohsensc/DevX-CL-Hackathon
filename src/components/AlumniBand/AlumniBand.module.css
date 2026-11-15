@@ -1,0 +1,147 @@
+.band {
+  padding: 72px 0 0;
+  background: #101017;
+  overflow: hidden;
+}
+
+.header {
+  width: min(100% - 2 * var(--page-gutter), var(--page-width));
+  margin: 0 auto 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.founder {
+  white-space: nowrap;
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--devx-muted);
+}
+
+.founder strong {
+  color: var(--cl-paper);
+  font-weight: 600;
+}
+
+.batch {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--cl-paper);
+  white-space: nowrap;
+}
+
+.viewport {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  padding: 48px 0 56px;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee 90s linear infinite;
+  will-change: transform;
+}
+
+.trackReverse {
+  animation-direction: reverse;
+}
+
+@keyframes marquee {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.logoGroup {
+  display: flex;
+  align-items: center;
+  gap: 96px;
+  padding-right: 96px;
+  list-style: none;
+  flex-shrink: 0;
+}
+
+.logoItem {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: transform 0.35s var(--ease-smooth);
+}
+
+@media (hover: hover) {
+  .logoItem:hover {
+    transform: scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation-duration: 90s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+.monochrome {
+  filter: brightness(0) invert(1);
+}
+
+.logoTag {
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: var(--devx-ember);
+  color: var(--cl-ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.logo {
+  width: auto;
+}
+
+@media (max-width: 760px) {
+  .founder {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 600px) {
+  .band {
+    padding-top: 48px;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+
+  .viewport {
+    gap: 32px;
+    padding: 32px 0 40px;
+  }
+
+  .logoGroup {
+    gap: 64px;
+    padding-right: 64px;
+  }
+}

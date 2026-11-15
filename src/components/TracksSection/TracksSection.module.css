@@ -1,0 +1,51 @@
+.rfsLink {
+  padding-block: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.25s;
+}
+
+@media (hover: hover) {
+  .rfsLink:hover {
+    color: var(--devx-blue);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.sources {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--devx-line);
+}
+
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .sources {
+    font-size: 14px;
+  }
+}

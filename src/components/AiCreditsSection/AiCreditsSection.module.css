@@ -1,0 +1,98 @@
+.creditCard {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 40px;
+  margin-top: 32px;
+  padding: 32px;
+  border: 1px solid var(--cl-ink);
+  border-radius: var(--radius-card);
+  background: var(--cl-sun);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.creditCopy {
+  position: relative;
+  padding-bottom: 96px;
+}
+
+.creditLead {
+  font-weight: 900;
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.25;
+}
+
+.creditBody {
+  margin-top: 14px;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.creditCharacter {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transition: transform 0.5s var(--ease-smooth);
+}
+
+.creditList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.creditItem {
+  padding: 18px 20px;
+  border: 1px solid var(--cl-ink);
+  border-radius: 10px;
+  background: var(--cl-paper);
+}
+
+.creditTitle {
+  font-weight: 900;
+  font-size: 19px;
+}
+
+.creditDetail {
+  margin-top: 4px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+@media (hover: hover) {
+  .creditCard:hover .creditCharacter {
+    transform: rotate(-8deg) scale(1.08);
+  }
+}
+
+@media (max-width: 900px) {
+  .creditCard {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .creditCard {
+    padding: 20px;
+  }
+
+  .creditCopy {
+    padding-bottom: 0;
+    padding-right: 72px;
+  }
+
+  .creditCharacter {
+    left: auto;
+    right: -6px;
+    top: 0;
+    bottom: auto;
+    width: 64px;
+    height: 64px;
+  }
+
+  .creditBody,
+  .creditDetail {
+    font-size: 16px;
+  }
+}

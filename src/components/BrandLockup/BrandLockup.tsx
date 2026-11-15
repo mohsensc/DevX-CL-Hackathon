@@ -1,0 +1,44 @@
+import { clubSites } from '../../content/event'
+import styles from './BrandLockup.module.css'
+
+export function CreativeLabsMark({ size = 26 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 33 33" fill="none" aria-hidden="true">
+      <path
+        d="M22.8718 16.9116C24.0244 16.9116 24.9841 17.8591 24.7163 18.9802C23.7844 22.8812 20.2753 25.7816 16.0888 25.7816C11.19 25.7816 7.21875 21.8104 7.21875 16.9116C7.21875 12.7251 10.1191 9.21598 14.0201 8.28404C15.1412 8.01621 16.0888 8.97594 16.0888 10.1286V14.8245C16.0888 15.9772 17.0232 16.9116 18.1759 16.9116H22.8718Z"
+        fill="currentColor"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M19.0982 7.21875C17.9448 7.21875 17.0098 8.15377 17.0098 9.30718V13.9017C17.0098 15.0551 17.9448 15.9902 19.0982 15.9902H23.6927C24.8462 15.9902 25.7812 15.0551 25.7812 13.9017V13.6929C25.7812 12.5395 24.8462 11.6045 23.6927 11.6045H23.4839C22.3305 11.6045 21.3955 10.6694 21.3955 9.51603V9.30718C21.3955 8.15377 20.4605 7.21875 19.307 7.21875H19.0982Z"
+        fill="currentColor"
+      />
+      <circle cx="16.5" cy="16.5" r="15.5" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  )
+}
+
+export function BrandLockup({ compact = false }: { compact?: boolean }) {
+  return (
+    <span className={styles.lockup}>
+      <a href={clubSites.devx} target="_blank" rel="noreferrer" className={styles.clubLink} aria-label="DevX website">
+        <img className={styles.devxMark} src="/brand/devx-logo.png" alt="" />
+        {!compact && <span className={styles.devxName}>DevX</span>}
+      </a>
+      <span className={styles.cross} aria-hidden="true">
+        ×
+      </span>
+      <a
+        href={clubSites.creativeLabs}
+        target="_blank"
+        rel="noreferrer"
+        className={styles.clubLink}
+        aria-label="Creative Labs website"
+      >
+        <CreativeLabsMark />
+        {!compact && <span className={styles.clName}>CREATIVE LABS</span>}
+      </a>
+    </span>
+  )
+}

@@ -1,0 +1,51 @@
+.facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 40px;
+  border-top: 1px solid var(--cl-ink);
+  border-bottom: 1px solid var(--cl-ink);
+}
+
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 24px 22px 28px 0;
+}
+
+.fact + .fact {
+  padding-left: 22px;
+  border-left: 1px solid var(--cl-ink);
+}
+
+.factValue {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.factLabel {
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+@media (max-width: 600px) {
+  .fact {
+    padding: 18px 8px 22px 0;
+  }
+
+  .fact + .fact {
+    padding-left: 10px;
+  }
+
+  .factValue {
+    font-size: clamp(22px, 6.2vw, 56px);
+    white-space: nowrap;
+  }
+
+  .factLabel {
+    font-size: 13px;
+  }
+}

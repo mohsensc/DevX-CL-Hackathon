@@ -1,0 +1,7 @@
+.divider {
+  width: 100%;
+  height: clamp(48px, 6.2vw, 84px);
+  margin-top: -1px;
+  margin-bottom: -1px;
+  shape-rendering: crispEdges;
+}

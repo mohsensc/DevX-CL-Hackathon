@@ -1,0 +1,168 @@
+.reasons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 20px;
+  list-style: none;
+}
+
+.reason {
+  padding: 22px 22px 22px 0;
+  border-top: 1px solid var(--cl-ink);
+}
+
+.reason:not(:nth-child(3n + 1)) {
+  padding-left: 22px;
+  border-left: 1px solid var(--cl-ink);
+}
+
+.reasonIndex {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--devx-blue);
+}
+
+.reasonTitle {
+  margin-top: 10px;
+  font-weight: 900;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.reasonBody {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.subheading {
+  margin-top: 64px;
+  font-weight: 900;
+  font-size: 22px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.tiers {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-top: 40px;
+}
+
+.tierCard:first-child {
+  border-width: 2px;
+  padding: 21px;
+}
+
+.perks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.perks li {
+  padding-left: 18px;
+  position: relative;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.perks li::before {
+  content: '➔';
+  position: absolute;
+  left: 0;
+  font-size: 11px;
+  top: 3px;
+}
+
+.inKind {
+  margin-top: 22px;
+  font-size: 16px;
+}
+
+.freeForBuilders {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  align-items: center;
+  gap: 32px;
+  margin-top: 40px;
+  padding: 26px 30px;
+  border: 1px solid var(--cl-ink);
+  border-radius: var(--radius-card);
+  background: var(--cl-mint);
+}
+
+.freeTitle {
+  font-weight: 900;
+  font-size: 22px;
+}
+
+.freeBody {
+  margin-top: 6px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.covers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+}
+
+.covers li {
+  padding: 8px 14px;
+  border: 1px solid var(--cl-ink);
+  border-radius: 999px;
+  background: var(--cl-paper);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+@media (max-width: 1000px) {
+  .tiers {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reasons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reason:not(:nth-child(3n + 1)) {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .reason:nth-child(2n) {
+    padding-left: 22px;
+    border-left: 1px solid var(--cl-ink);
+  }
+
+  .freeForBuilders {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .reasons,
+  .tiers {
+    grid-template-columns: 1fr;
+  }
+
+  .reason:nth-child(2n) {
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .reasonBody,
+  .perks li {
+    font-size: 16px;
+  }
+
+  .freeForBuilders {
+    padding: 22px 20px;
+  }
+}

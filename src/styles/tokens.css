@@ -1,0 +1,34 @@
+:root {
+  --devx-night: #141519;
+  --devx-night-deep: #0e0e0f;
+  --devx-night-raised: #1e2028;
+  --devx-line: #4d4e57;
+  --devx-muted: #98999e;
+  --devx-blue: #437ffe;
+  --devx-blue-bright: #2970ff;
+  --devx-blue-deep: #3162c9;
+  --devx-blue-glow: #486bcd;
+  --devx-blue-soft: #b2c5f8;
+  --devx-ember: #f2745d;
+  --devx-ember-deep: #e84d38;
+
+  --cl-ink: #000000;
+  --cl-paper: #ffffff;
+  --cl-sun: #fff740;
+  --cl-sky: #c8dbff;
+  --cl-mint: #97eca0;
+  --cl-bubblegum: #f885d8;
+  --cl-lilac: #e0b8ff;
+  --cl-peach: #ffcb8e;
+  --cl-gray: #c4c4c4;
+
+  --font-display: 'Play', 'Inter', system-ui, sans-serif;
+  --font-devx: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-cl: 'Lato', 'Inter', system-ui, sans-serif;
+
+  --page-width: 1200px;
+  --page-gutter: clamp(16px, 4vw, 40px);
+  --radius-card: 14px;
+  --radius-button: 8px;
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}

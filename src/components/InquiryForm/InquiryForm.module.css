@@ -80,8 +80,30 @@ select.input {
   transition: transform 0.3s var(--ease-smooth), background 0.3s;
 }
 
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.confirmation {
+  font-family: var(--font-cl);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--cl-sun);
+}
+
+.decoy {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
 @media (hover: hover) {
-  .submitButton:hover {
+  .submitButton:not(:disabled):hover {
     background: var(--cl-paper);
     transform: translateY(-3px) rotate(-1.5deg);
   }

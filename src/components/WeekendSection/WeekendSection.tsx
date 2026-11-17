@@ -24,7 +24,7 @@ export function WeekendSection() {
       intro={
         <p>
           {eventDetails.dateLabel} at {eventDetails.venues.join(' and ')}, {eventDetails.campus}. Teams build for 36
-          hours and submit their YC applications by the Sunday morning code freeze.
+          hours and send their YC applications before Sunday’s 9&nbsp;AM code freeze.
         </p>
       }
     >

@@ -7,11 +7,11 @@ export function PeopleSection() {
   return (
     <Section
       id="people"
-      heading="Who You Will Meet"
+      heading="Who You’ll Meet"
       intro={
         <p>
-          You will meet 250 builders who already ship and want to start a company. Most of them will be
-          picking their AI tools for the weekend on Friday night.
+          250 builders who already ship and want to start something. On Friday night they pick the AI tools
+          they’ll use all weekend.
         </p>
       }
     >

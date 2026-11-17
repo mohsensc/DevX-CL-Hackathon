@@ -18,7 +18,7 @@ export function SponsorCta() {
       <div ref={innerRef} className={styles.inner}>
         <div className={styles.copy}>
           <h2 id="contact-heading" className={styles.heading}>
-            Let’s work together.
+            Let’s make something cool.
           </h2>
           <p className={styles.lead}>
             Tell us what your team wants out of the weekend and we’ll build a package around it.

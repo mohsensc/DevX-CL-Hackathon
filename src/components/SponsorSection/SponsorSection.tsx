@@ -13,8 +13,8 @@ export function SponsorSection() {
       heading="Packages"
       intro={
         <p>
-          Every package puts your team on the floor with 250 builders. Pick one below, or email us and we will put
-          together a custom one.
+          Every package gets your team in the room with 250 builders. Pick one, or email us and we’ll make one that
+          fits.
         </p>
       }
     >

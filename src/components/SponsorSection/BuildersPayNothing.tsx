@@ -15,7 +15,7 @@ export function BuildersPayNothing() {
       <div>
         <h3 className={styles.freeTitle}>Builders pay nothing</h3>
         <p className={styles.freeBody}>
-          Sponsors cover the whole weekend, so UCLA Startup Hacks stays free for every builder who gets in.
+          Sponsors cover the whole weekend, so no builder pays to be here.
         </p>
       </div>
       <Rail as="ul" label="What sponsorship covers" className={styles.covers} motion="none" hasIndicator={false}>

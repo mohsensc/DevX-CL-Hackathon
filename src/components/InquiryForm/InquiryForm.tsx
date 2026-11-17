@@ -115,7 +115,7 @@ export function InquiryForm() {
       <div className={styles.submitRow}>
         {submitStatus === 'sent' ? (
           <p className={styles.confirmation} role="status">
-            Sent. We&rsquo;ll be in touch.
+            Got it! We&rsquo;ll be in touch.
           </p>
         ) : (
           <button type="submit" className={styles.submitButton} disabled={submitStatus === 'sending'}>

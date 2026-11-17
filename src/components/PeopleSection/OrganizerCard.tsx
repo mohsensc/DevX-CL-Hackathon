@@ -19,13 +19,13 @@ export function OrganizerCard() {
       </div>
       <h3 className={styles.cardTitle}>Run by DevX and Creative Labs</h3>
       <p className={styles.organizerBody}>
-        DevX is UCLA’s product development organization. Creative Labs is UCLA’s home for creatives building
-        technical and creative projects every quarter. Our organizers are experienced event planners who have run
-        internal hackathons for both clubs.
+        DevX is UCLA’s product development organization. Creative Labs is a community of UCLA creatives working on
+        cool projects every quarter. Our organizers are experienced planners who have run hackathons inside both
+        clubs.
       </p>
 
       <div className={styles.shipped}>
-        <span className={styles.shippedLabel}>Shipped by our members</span>
+        <span className={styles.shippedLabel}>Built by our members</span>
         <ul className={styles.appList}>
           {shippedApps.map((app) => (
             <li key={app.name}>

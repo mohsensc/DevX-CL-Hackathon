@@ -11,9 +11,9 @@ function formatTrackNumber(trackIndex: number) {
 function TrackSources({ sources }: { sources: string[] }) {
   return (
     <>
-      <p className={styles.sources}>From: {sources.join(', ')}</p>
+      <p className={styles.sources}>From YC’s requests: {sources.join(', ')}</p>
       <div className={styles.sourceBlock}>
-        <span className={styles.sourceLabel}>From</span>
+        <span className={styles.sourceLabel}>From YC’s requests</span>
         <ul className={styles.sourceList}>
           {sources.map((source) => (
             <li key={source} className={styles.sourceItem}>
@@ -33,8 +33,8 @@ export function TracksSection() {
       heading="Tracks"
       intro={
         <p>
-          Every track comes from Y&nbsp;Combinator’s Winter 2027 Requests for Startups. Gold and Title sponsors can put
-          their name on a track.{' '}
+          Every track comes from Y&nbsp;Combinator’s Winter 2027 Requests for Startups. Gold and Title sponsors get
+          their name on one.{' '}
           <a href={ycRfsUrl} target="_blank" rel="noreferrer" className={styles.rfsLink}>
             Read YC’s RFS
           </a>

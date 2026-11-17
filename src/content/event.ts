@@ -1,6 +1,6 @@
 export const eventDetails = {
   name: 'UCLA Startup Hacks',
-  tagline: 'A startup incubator hackathon by DevX and Creative\u00a0Labs, UCLA’s premier product organizations, where every team applies to YC’s Spring\u00a02027 batch.',
+  tagline: 'DevX and Creative\u00a0Labs are putting 250 builders in one room for 36\u00a0hours. Every team builds a product and applies to YC’s Spring\u00a02027 batch.',
   dateLabel: 'February 5–7, 2027',
   startsAt: '2027-02-05T18:00:00-08:00',
   venues: ['Pauley Pavilion', 'Ackerman Grand Ballroom'],
@@ -11,16 +11,16 @@ export const eventDetails = {
 export type CharacterKind = 'sun' | 'star' | 'pill' | 'triangle' | 'bubble'
 
 export const eventFacts = [
-  { value: '250', label: 'builders expected' },
-  { value: '50+', label: 'YC applications expected' },
+  { value: '250', label: 'builders in one room' },
+  { value: '50+', label: 'YC applications sent' },
   { value: '36 hours', label: 'of building' },
 ]
 
 export const builderProfile = [
-  'Engineers who already ship AI side projects',
-  'Designers who prototype in code',
-  'Founders with an idea they keep coming back to',
-  'Product thinkers who know what users actually want',
+  'Developers with apps already out in the world',
+  'Designers who build what they draw',
+  'Creatives with an idea they can’t put down',
+  'PMs who talk to users before they write a spec',
 ]
 
 export const shippedApps = [
@@ -76,27 +76,27 @@ export const ycFounderAlum = {
 export const sponsorReasons = [
   {
     title: 'Meet founders before YC does',
-    body: '50+ teams in one room, writing and submitting their YC applications that weekend.',
+    body: '50+ teams write and send their YC applications that weekend. You’re in the room while they do.',
   },
   {
-    title: 'Recruit people who ship',
-    body: 'A résumé book of every builder, plus the AI products they built over the weekend.',
+    title: 'Hire people who ship',
+    body: 'You get a résumé book of every builder, plus what they built.',
   },
   {
     title: 'Put your name on a track',
-    body: 'Set a challenge for teams building with your tech, pick the winner, and award the prize.',
+    body: 'Set the challenge, pick the winner, and hand over the prize.',
   },
   {
-    title: 'Run a workshop or demo',
-    body: 'Teach builders your API or tool on Saturday, before they decide what to build with.',
+    title: 'Teach your tool',
+    body: 'Run a workshop or demo on Saturday, before teams decide what to build with.',
   },
   {
-    title: 'Your logo on the weekend',
-    body: 'Signage, shirts, the stage screens, and this site, in front of 250 builders for 36 hours.',
+    title: 'Your logo, all weekend',
+    body: 'On the shirts, the stage, the signage, and this site.',
   },
   {
-    title: 'Reach both clubs online',
-    body: 'Posts from DevX and Creative Labs before, during, and after the event.',
+    title: 'Reach both clubs',
+    body: 'DevX and Creative Labs post about you before, during, and after.',
   },
 ]
 
@@ -245,7 +245,7 @@ export const frequentQuestions = [
   {
     question: 'How do AI credits work?',
     answer:
-      'Send us promo codes or an API key with a spending cap. We hand them to teams at check-in on Friday. You choose the amount per team and the expiry date.',
+      'Send us promo codes or an API key with a spending cap. Teams get them at check-in on Friday. You pick the amount per team and when they expire.',
   },
   {
     question: 'Can we send mentors or judges?',
@@ -253,10 +253,10 @@ export const frequentQuestions = [
   },
   {
     question: 'How do we pay?',
-    answer: 'Email ucladevx@gmail.com with the package you want. We send an invoice and payment details by email.',
+    answer: 'Email ucladevx@gmail.com with the package you want and we’ll send an invoice.',
   },
   {
     question: 'Is this affiliated with Y\u00a0Combinator?',
-    answer: 'No. DevX and Creative Labs organize the event. Teams apply through YC’s public application.',
+    answer: 'No. DevX and Creative Labs run the event. Teams apply through YC’s public application.',
   },
 ]

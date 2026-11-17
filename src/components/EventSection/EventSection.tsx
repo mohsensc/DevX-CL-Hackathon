@@ -53,9 +53,10 @@ export function EventSection() {
       heading="The Event"
       intro={
         <p>
-          UCLA Startup Hacks is a weekend hackathon run by DevX and Creative Labs. Teams pick a track based on
-          Y&nbsp;Combinator’s Requests for Startups, build a working AI product, and submit a YC application for the Spring&nbsp;2027 batch before the
-          weekend ends. Sponsors meet the teams in person and see their tools used in what gets built.
+          UCLA Startup Hacks is a weekend hackathon by DevX and Creative Labs for UCLA creators and entrepreneurs who
+          want to put something out into the world. Teams pick a track from Y&nbsp;Combinator’s Requests for Startups,
+          build a real AI product, and send in a YC application for Spring&nbsp;2027 before Sunday’s code freeze. You
+          meet them in person and watch your tools get used.
         </p>
       }
     >

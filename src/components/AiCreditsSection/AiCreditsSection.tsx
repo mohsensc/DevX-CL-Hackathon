@@ -18,10 +18,10 @@ export function AiCreditsSection() {
     <Section id="credits" heading="Sponsor With AI Credits">
       <div ref={creditCardRef} className={styles.creditCard} data-in-view={isCreditCardInView}>
         <div className={styles.creditCopy}>
-          <p className={styles.creditLead}>Send API credits for our 250 builders.</p>
+          <p className={styles.creditLead}>Got an API? Put it in 250 builders’ hands.</p>
           <p className={styles.creditBody}>
-            If your company offers a model API, a coding tool, or compute, send credits for the weekend. We hand them to
-            every team at check-in on Friday, and they count toward any package.
+            If you make a model, a coding tool, or compute, send credits for the weekend. Every team gets them at
+            Friday check-in, and they count toward any package.
           </p>
           <Character kind="pill" size={96} className={styles.creditCharacter} />
         </div>

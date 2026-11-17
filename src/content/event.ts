@@ -158,47 +158,12 @@ export const creditOptions = [
 
 export const ycRfsUrl = 'https://www.ycombinator.com/rfs'
 
-export const tracks = [
-  {
-    name: 'Civic AI',
-    character: 'sun' as CharacterKind,
-    tint: 'var(--cl-sky)',
-    description: 'Software that helps people get government benefits and helps cities run.',
-    sources: ['Plaid for Government Benefits', 'AI for City Hall'],
-  },
-  {
-    name: 'AI Experts',
-    character: 'star' as CharacterKind,
-    tint: 'var(--cl-mint)',
-    description: 'Tools that let a smart person without credentials do expert work.',
-    sources: ['The $15-an-Hour Expert'],
-  },
-  {
-    name: 'Better Models',
-    character: 'pill' as CharacterKind,
-    tint: 'var(--cl-peach)',
-    description: 'Specialized models, and models that write better.',
-    sources: ['LLMs That Write Well', 'Vertical Foundation Models'],
-  },
-  {
-    name: 'Private AI',
-    character: 'bubble' as CharacterKind,
-    tint: 'var(--cl-lilac)',
-    description: 'AI that runs on your own hardware or fully offline.',
-    sources: ['Own Your Intelligence', 'AI for the Air-Gapped Economy'],
-  },
-  {
-    name: 'Physical Buildout',
-    character: 'triangle' as CharacterKind,
-    tint: 'var(--cl-sun)',
-    description: 'Software for robots, data centers, space, and the money behind them.',
-    sources: [
-      'Robots Made in America',
-      'Data Center Supply Chain',
-      'Wall Street for the Physical Buildout',
-      'Startups in a World of Abundant Space Access',
-    ],
-  },
+export const trackTeasers = [
+  { character: 'sun' as CharacterKind, tint: 'var(--cl-sky)' },
+  { character: 'star' as CharacterKind, tint: 'var(--cl-mint)' },
+  { character: 'pill' as CharacterKind, tint: 'var(--cl-peach)' },
+  { character: 'bubble' as CharacterKind, tint: 'var(--cl-lilac)' },
+  { character: 'triangle' as CharacterKind, tint: 'var(--cl-sun)' },
 ]
 
 export const weekendSchedule = [

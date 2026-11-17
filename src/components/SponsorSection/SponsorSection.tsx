@@ -12,10 +12,13 @@ export function SponsorSection() {
       id="packages"
       heading="Packages"
       intro={
-        <p>
-          Every package gets your team in the room with 250 builders. Pick one, or email us and we’ll make one that
-          fits.
-        </p>
+        <>
+          <p>
+            Every package gets your team in the room with 250 builders. Pick one, or email us and we’ll make one that
+            fits.
+          </p>
+          <p className={styles.revealSoon}>Sponsors will be revealed soon</p>
+        </>
       }
     >
       <Rail label="Packages" className={styles.tiers}>

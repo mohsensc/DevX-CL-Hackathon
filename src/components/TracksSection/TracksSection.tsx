@@ -1,61 +1,38 @@
-import { tracks, ycRfsUrl } from '../../content/event'
-import { Card } from '../Card/Card'
-import { Rail } from '../Rail/Rail'
+import { useRef } from 'react'
+import { trackTeasers, ycRfsUrl } from '../../content/event'
+import { useInView } from '../../hooks/useInView'
+import { Character } from '../Character/Character'
 import { Section } from '../Section/Section'
 import styles from './TracksSection.module.css'
 
-function formatTrackNumber(trackIndex: number) {
-  return String(trackIndex + 1).padStart(2, '0')
-}
-
-function TrackSources({ sources }: { sources: string[] }) {
-  return (
-    <>
-      <p className={styles.sources}>From YC’s requests: {sources.join(', ')}</p>
-      <div className={styles.sourceBlock}>
-        <span className={styles.sourceLabel}>From YC’s requests</span>
-        <ul className={styles.sourceList}>
-          {sources.map((source) => (
-            <li key={source} className={styles.sourceItem}>
-              {source}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </>
-  )
-}
-
 export function TracksSection() {
+  const teaserRef = useRef<HTMLDivElement>(null)
+  const isTeaserInView = useInView(teaserRef)
+
   return (
     <Section
       id="tracks"
       heading="Tracks"
       intro={
         <p>
-          Every track comes from Y&nbsp;Combinator’s Winter 2027 Requests for Startups. Gold and Title sponsors get
-          their name on one.{' '}
+          We’ll reveal the tracks once Y&nbsp;Combinator posts its Requests for Startups for Spring&nbsp;2027. Want a
+          feel for what tech is blooming right now? Check out Winter’s list.{' '}
           <a href={ycRfsUrl} target="_blank" rel="noreferrer" className={styles.rfsLink}>
-            Read YC’s RFS
+            See Winter’s RFS
           </a>
         </p>
       }
     >
-      <Rail label="Tracks" className={styles.grid}>
-        {tracks.map((track, trackIndex) => (
-          <Card
-            key={track.name}
-            tint={track.tint}
-            character={track.character}
-            title={track.name}
-            badge={<span className={styles.trackNumber}>{formatTrackNumber(trackIndex)}</span>}
-            className={styles.trackCard}
-          >
-            <p>{track.description}</p>
-            <TrackSources sources={track.sources} />
-          </Card>
-        ))}
-      </Rail>
+      <div ref={teaserRef} className={styles.teaser} data-in-view={isTeaserInView}>
+        <ul className={styles.teaserTiles} aria-hidden="true">
+          {trackTeasers.map((teaser) => (
+            <li key={teaser.character} className={styles.teaserTile} style={{ background: teaser.tint }}>
+              <Character kind={teaser.character} size={72} className={styles.teaserCharacter} />
+            </li>
+          ))}
+        </ul>
+        <p className={styles.teaserNote}>Tracks revealed soon</p>
+      </div>
     </Section>
   )
 }

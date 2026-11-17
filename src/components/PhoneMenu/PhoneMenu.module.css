@@ -1,0 +1,199 @@
+.menu {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    visibility: hidden;
+    pointer-events: none;
+    transition: visibility 0s 0.4s;
+  }
+
+  .open {
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--devx-night);
+    opacity: 0;
+    transition: opacity 0.35s var(--ease-smooth);
+  }
+
+  .open .backdrop {
+    opacity: 1;
+  }
+
+  .glow {
+    position: absolute;
+    inset: -20% -40% 30% -40%;
+    background:
+      radial-gradient(42% 36% at 22% 18%, rgba(242, 116, 93, 0.6), transparent 70%),
+      radial-gradient(60% 52% at 46% 12%, rgba(72, 107, 205, 0.8), transparent 72%),
+      radial-gradient(40% 40% at 88% 96%, rgba(72, 107, 205, 0.28), transparent 70%);
+    opacity: 0;
+    transform: translate3d(0, -18%, 0) scale(0.8);
+    transition: transform 0.9s var(--ease-smooth), opacity 0.6s var(--ease-smooth);
+  }
+
+  .open .glow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: calc(var(--phone-top-clearance) + clamp(14px, 3svh, 32px)) calc(var(--phone-edge) + 8px)
+      calc(var(--phone-action-bar-inset) + 4px);
+  }
+
+  .links {
+    list-style: none;
+  }
+
+  .item,
+  .date,
+  .sponsorAction {
+    opacity: 0;
+    transform: translate3d(0, 28px, 0);
+    transition: transform 0.3s var(--ease-smooth), opacity 0.2s var(--ease-smooth);
+  }
+
+  .open .item,
+  .open .date,
+  .open .sponsorAction {
+    opacity: 1;
+    transform: none;
+    transition:
+      transform 0.7s var(--ease-smooth) calc(80ms + var(--item-index) * 55ms),
+      opacity 0.5s var(--ease-smooth) calc(80ms + var(--item-index) * 55ms),
+      scale 0.2s var(--ease-smooth);
+  }
+
+  .item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .link {
+    display: grid;
+    grid-template-columns: 34px 1fr auto;
+    align-items: baseline;
+    min-height: clamp(54px, 8.6svh, 76px);
+    padding-block: clamp(8px, 1.6svh, 16px);
+    color: var(--cl-paper);
+  }
+
+  .linkIndex {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--devx-blue-soft);
+  }
+
+  .linkLabel {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, min(11vw, 5.6svh), 46px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    transition: transform 0.3s var(--ease-smooth);
+  }
+
+  .linkArrow {
+    font-size: 20px;
+    color: var(--devx-blue);
+    transition: transform 0.3s var(--ease-smooth);
+  }
+
+  .link:active .linkLabel {
+    transform: translate3d(8px, 0, 0);
+  }
+
+  .link:active .linkArrow {
+    transform: translate3d(8px, 0, 0);
+  }
+
+  .footer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+    min-height: clamp(120px, 24svh, 240px);
+    padding-top: 20px;
+  }
+
+  .sun {
+    position: absolute;
+    right: -34px;
+    bottom: 46px;
+    width: min(54vw, 30svh);
+    opacity: 0;
+    transform: translate3d(45%, 70%, 0);
+    transition: transform 0.3s var(--ease-smooth), opacity 0.2s;
+  }
+
+  .open .sun {
+    opacity: 1;
+    transform: none;
+    transition: transform 0.9s var(--ease-spring) 0.25s, opacity 0.3s 0.25s;
+  }
+
+  .date {
+    margin-bottom: 14px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--devx-muted);
+  }
+
+  .sponsorAction {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 62px;
+    padding: 0 22px;
+    border: 1px solid var(--cl-ink);
+    border-radius: var(--radius-card);
+    background: var(--cl-sun);
+    color: var(--cl-ink);
+    font-family: var(--font-cl);
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .sponsorAction:active {
+    scale: 0.97;
+  }
+
+  .sponsorArrow {
+    font-size: 0.8em;
+    animation: arrowNudge 1.6s var(--ease-smooth) infinite;
+  }
+
+  @keyframes arrowNudge {
+    0%,
+    60%,
+    100% {
+      transform: none;
+    }
+    30% {
+      transform: translate3d(7px, 0, 0);
+    }
+  }
+}

@@ -24,6 +24,8 @@ type GlyphCell = {
 const glyphCharacters = ['0', '1', '0', '1', '+', '=', '/', '\\', '<', '>', '#', ':', '*', '~', '^', '{', '}', ';', '$', '@']
 const inkThreshold = 90
 const hoverRadiusRatio = 0.14
+const touchRadiusRatio = 0.2
+const touchLingerMs = 1100
 
 function buildGlyphAtlas(cellSize: number, color: string) {
   const atlas = document.createElement('canvas')
@@ -60,7 +62,9 @@ export function GlyphField({
 
     const context = canvas.getContext('2d')!
     const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
+    const isTouchDevice = matchMedia('(pointer: coarse)').matches
     const pointer = { x: -9999, y: -9999, active: false }
+    let lastPointerTime = Number.NEGATIVE_INFINITY
 
     let cells: GlyphCell[] = []
     let cellSize = 8
@@ -116,7 +120,7 @@ export function GlyphField({
       canvas!.style.height = `${rowCount * cssCellSize}px`
       inkAtlas = buildGlyphAtlas(cellSize, inkColor)
       highlightAtlas = buildGlyphAtlas(cellSize, highlightColor)
-      hoverRadius = width * hoverRadiusRatio * devicePixelRatio
+      hoverRadius = width * (isTouchDevice ? touchRadiusRatio : hoverRadiusRatio) * devicePixelRatio
       cells = nextCells
 
       if (prefersReducedMotion) drawFrame(Number.POSITIVE_INFINITY, false)
@@ -126,6 +130,7 @@ export function GlyphField({
       if (!inkAtlas || !highlightAtlas) return
       context.clearRect(0, 0, canvas!.width, canvas!.height)
       const time = elapsed / 1000
+      if (isTouchDevice && isLive && performance.now() - lastPointerTime > touchLingerMs) driftPointer(time)
       const pointerX = pointer.x * devicePixelRatio
       const pointerY = pointer.y * devicePixelRatio
 
@@ -152,6 +157,14 @@ export function GlyphField({
       context.globalAlpha = 1
     }
 
+    function driftPointer(time: number) {
+      const width = canvas!.width / devicePixelRatio
+      const height = canvas!.height / devicePixelRatio
+      pointer.x = width * (0.5 + 0.44 * Math.sin(time * 0.52))
+      pointer.y = height * (0.5 + 0.44 * Math.sin(time * 0.37 + 1.3))
+      pointer.active = true
+    }
+
     function tick(now: number) {
       if (isDisposed) return
       if (isVisible) drawFrame(now - startedAt, true)
@@ -160,6 +173,7 @@ export function GlyphField({
 
     function handlePointerMove(event: PointerEvent) {
       const bounds = canvas!.getBoundingClientRect()
+      lastPointerTime = performance.now()
       pointer.x = event.clientX - bounds.left
       pointer.y = event.clientY - bounds.top
       pointer.active = pointer.x > -80 && pointer.y > -80 && pointer.x < bounds.width + 80 && pointer.y < bounds.height + 80

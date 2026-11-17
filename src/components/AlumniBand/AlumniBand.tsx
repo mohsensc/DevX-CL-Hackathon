@@ -1,12 +1,22 @@
+import { useMemo, useRef } from 'react'
+import type { CSSProperties } from 'react'
 import { memberCompanies, ycFounderAlum } from '../../content/event'
+import { useInView } from '../../hooks/useInView'
+import { useIsPhone } from '../../hooks/useIsPhone'
+import { useScrollProgress } from './useScrollProgress'
 import styles from './AlumniBand.module.css'
 
 type MemberCompany = (typeof memberCompanies)[number]
 
-const logoRows = [
-  memberCompanies.filter((_, index) => index % 2 === 0),
-  memberCompanies.filter((_, index) => index % 2 === 1),
-]
+const desktopRowCount = 2
+const phoneRowCount = 3
+const founderCompany = memberCompanies.find((company) => company.name === ycFounderAlum.company)
+
+function splitIntoRows(rowCount: number) {
+  return Array.from({ length: rowCount }, (_, rowIndex) =>
+    memberCompanies.filter((_, companyIndex) => companyIndex % rowCount === rowIndex),
+  )
+}
 
 function LogoGroup({ companies, isDuplicate = false }: { companies: MemberCompany[]; isDuplicate?: boolean }) {
   return (
@@ -26,22 +36,47 @@ function LogoGroup({ companies, isDuplicate = false }: { companies: MemberCompan
   )
 }
 
+function FounderMark() {
+  if (!founderCompany) return null
+  return (
+    <span className={styles.founderMark} aria-hidden="true">
+      <img src={founderCompany.logo} alt="" className={styles.founderLogo} />
+      <span className={styles.founderTag}>{ycFounderAlum.batch}</span>
+    </span>
+  )
+}
+
 export function AlumniBand() {
+  const headerRef = useRef<HTMLDivElement>(null)
+  const viewportRef = useRef<HTMLDivElement>(null)
+  const isPhone = useIsPhone()
+  const isHeaderInView = useInView(headerRef)
+  const isViewportInView = useInView(viewportRef)
+  const logoRows = useMemo(() => splitIntoRows(isPhone ? phoneRowCount : desktopRowCount), [isPhone])
+  useScrollProgress(viewportRef, isPhone, '--band-progress')
+
   return (
     <section className={styles.band} aria-labelledby="alumni-heading">
-      <div className={styles.header}>
+      <div ref={headerRef} className={styles.header} data-in-view={isHeaderInView}>
         <h2 id="alumni-heading" className={styles.title}>
           Where our active members have interned and founded
         </h2>
         <p className={styles.founder}>
-          Including <strong>{ycFounderAlum.name}</strong>, who went from {ycFounderAlum.club} to co-founding{' '}
-          <strong>{ycFounderAlum.company}</strong> (<span className={styles.batch}>{ycFounderAlum.batch}</span>), formerly{' '}
-          {ycFounderAlum.formerName}.
+          <FounderMark />
+          <span className={styles.founderText}>
+            Including <strong>{ycFounderAlum.name}</strong>, who went from {ycFounderAlum.club} to co-founding{' '}
+            <strong>{ycFounderAlum.company}</strong> (<span className={styles.batch}>{ycFounderAlum.batch}</span>),
+            formerly {ycFounderAlum.formerName}.
+          </span>
         </p>
       </div>
-      <div className={styles.viewport}>
+      <div ref={viewportRef} className={styles.viewport} data-in-view={isViewportInView}>
         {logoRows.map((companies, rowIndex) => (
-          <div key={rowIndex} className={`${styles.track} ${rowIndex === 1 ? styles.trackReverse : ''}`}>
+          <div
+            key={rowIndex}
+            className={`${styles.track} ${rowIndex % 2 === 1 ? styles.trackReverse : ''}`}
+            style={{ '--row-index': rowIndex } as CSSProperties}
+          >
             <LogoGroup companies={companies} />
             <LogoGroup companies={companies} isDuplicate />
           </div>

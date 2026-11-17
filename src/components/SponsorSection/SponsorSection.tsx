@@ -1,6 +1,9 @@
-import { sponsorReasons, sponsorshipCovers, sponsorTiers } from '../../content/event'
+import { sponsorTiers } from '../../content/event'
 import { Card } from '../Card/Card'
+import { Rail } from '../Rail/Rail'
 import { Section } from '../Section/Section'
+import { BuildersPayNothing } from './BuildersPayNothing'
+import { SponsorReasons } from './SponsorReasons'
 import styles from './SponsorSection.module.css'
 
 export function SponsorSection() {
@@ -15,7 +18,7 @@ export function SponsorSection() {
         </p>
       }
     >
-      <div className={styles.tiers}>
+      <Rail label="Packages" className={styles.tiers}>
         {sponsorTiers.map((tier) => (
           <Card
             key={tier.name}
@@ -32,33 +35,11 @@ export function SponsorSection() {
             </ul>
           </Card>
         ))}
-      </div>
+      </Rail>
       <p className={styles.inKind}>AI credits, API access, hardware, and prizes count toward any package.</p>
 
-      <div className={styles.freeForBuilders}>
-        <div>
-          <h3 className={styles.freeTitle}>Builders pay nothing</h3>
-          <p className={styles.freeBody}>
-            Sponsors cover the whole weekend, so UCLA Startup Hacks stays free for every builder who gets in.
-          </p>
-        </div>
-        <ul className={styles.covers} aria-label="What sponsorship covers">
-          {sponsorshipCovers.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </div>
-
-      <h3 className={styles.subheading}>Why sponsor</h3>
-      <ol className={styles.reasons}>
-        {sponsorReasons.map((reason, index) => (
-          <li key={reason.title} className={styles.reason}>
-            <span className={styles.reasonIndex}>{String(index + 1).padStart(2, '0')}</span>
-            <h4 className={styles.reasonTitle}>{reason.title}</h4>
-            <p className={styles.reasonBody}>{reason.body}</p>
-          </li>
-        ))}
-      </ol>
+      <BuildersPayNothing />
+      <SponsorReasons />
     </Section>
   )
 }

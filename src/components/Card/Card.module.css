@@ -56,22 +56,50 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
   .card {
     padding: 16px;
+    box-shadow: none;
+    transition: scale 0.25s var(--ease-smooth);
+  }
+
+  .card:active {
+    scale: 0.98;
   }
 
   .panel {
-    height: 96px;
+    height: 164px;
   }
 
   .character {
-    scale: 0.7;
+    scale: 1.16;
+    animation:
+      characterHello 0.9s var(--ease-spring) backwards,
+      characterFloat 4.5s ease-in-out 0.9s infinite;
+  }
+
+  .card[data-in-view='false'] .character {
+    opacity: 0;
+    animation: none;
+  }
+
+  .card[data-rail-active='true'] .character {
+    transform: rotate(-8deg) scale(1.08);
+  }
+
+  .badge {
+    font-size: 30px;
+    transition: transform 0.6s var(--ease-spring) 0.2s, opacity 0.3s 0.2s;
+  }
+
+  .card[data-in-view='false'] .badge {
+    opacity: 0;
+    transform: translate3d(-14px, 0, 0);
   }
 
   .title {
-    margin-top: 14px;
-    font-size: 20px;
+    margin-top: 16px;
+    font-size: 22px;
   }
 
   .compact {
@@ -87,15 +115,41 @@
 
   .compact .character {
     margin: -10px;
-    scale: 0.55;
+    scale: 0.58;
   }
 
   .compact .title {
     margin-top: 0;
+    font-size: 20px;
   }
 
   .compact .body {
     grid-column: 1 / -1;
     margin-top: 14px;
+  }
+
+  @keyframes characterHello {
+    from {
+      opacity: 0;
+      translate: 0 70px;
+      rotate: 24deg;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      rotate: 0deg;
+    }
+  }
+
+  @keyframes characterFloat {
+    0%,
+    100% {
+      translate: 0 0;
+      rotate: 0deg;
+    }
+    50% {
+      translate: 0 -5px;
+      rotate: 3deg;
+    }
   }
 }

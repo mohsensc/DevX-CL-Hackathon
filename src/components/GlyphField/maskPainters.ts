@@ -25,6 +25,17 @@ export const paintDevxCross: MaskPainter = async (context, width, height) => {
   context.drawImage(image, width - drawWidth, (height - drawHeight) / 2, drawWidth, drawHeight)
 }
 
+const boldStrokeShifts = [-0.5, 0.5]
+
+export const paintDevxCrossBold: MaskPainter = async (context, width, height) => {
+  for (const shift of boldStrokeShifts) {
+    context.save()
+    context.translate(shift, 0)
+    await paintDevxCross(context, width, height)
+    context.restore()
+  }
+}
+
 export const paintSmiley: MaskPainter = (context, width, height) => {
   const side = Math.min(width, height) * 0.96
   context.save()

@@ -1,5 +1,6 @@
-import { Fragment } from 'react'
+import { Fragment, useRef } from 'react'
 import { eventDetails } from '../../content/event'
+import { useInView } from '../../hooks/useInView'
 import { GlyphField } from '../GlyphField/GlyphField'
 import { paintSmiley } from '../GlyphField/maskPainters'
 import { InquiryForm } from '../InquiryForm/InquiryForm'
@@ -9,9 +10,12 @@ const sponsorMailto = `mailto:${eventDetails.sponsorEmail}?subject=${encodeURICo
 const detailItems = [eventDetails.dateLabel, ...eventDetails.venues]
 
 export function SponsorCta() {
+  const innerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(innerRef)
+
   return (
-    <section id="contact" className={styles.contact} aria-labelledby="contact-heading">
-      <div className={styles.inner}>
+    <section id="contact" className={styles.contact} aria-labelledby="contact-heading" data-in-view={isInView}>
+      <div ref={innerRef} className={styles.inner}>
         <div className={styles.copy}>
           <h2 id="contact-heading" className={styles.heading}>
             Let’s work together.
@@ -22,7 +26,7 @@ export function SponsorCta() {
           <p className={styles.details}>
             {detailItems.map((item, index) => (
               <Fragment key={item}>
-                {index > 0 && ' · '}
+                {index > 0 && <span className={styles.detailSeparator}> · </span>}
                 <span className={styles.detailItem}>{item}</span>
               </Fragment>
             ))}

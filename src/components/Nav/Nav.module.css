@@ -68,21 +68,93 @@
   }
 }
 
+.menuButton {
+  display: none;
+}
+
 @media (max-width: 720px) {
-  .bar {
-    flex-wrap: wrap;
-    row-gap: 4px;
+  .shell {
+    inset: auto var(--phone-edge);
+    top: var(--phone-top-bar-inset);
   }
 
-  .links {
-    order: 3;
+  .bar {
+    position: relative;
+    z-index: 1;
+    gap: 12px;
+    height: var(--phone-top-bar-height);
+    padding: 6px 6px 6px 5px;
+    border-radius: 14px;
+    transition: background 0.35s var(--ease-smooth), border-color 0.35s var(--ease-smooth);
+  }
+
+  .menuOpen .bar {
+    background: rgba(20, 21, 25, 0.4);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .brand > span {
+    gap: 1px;
+  }
+
+  .brand a {
+    justify-content: center;
+    min-width: 44px;
+  }
+
+  .links,
+  .sponsorAction {
+    display: none;
+  }
+
+  .menuButton {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--cl-paper);
+    color: var(--cl-ink);
+    transition: background 0.3s var(--ease-smooth), scale 0.2s var(--ease-smooth);
+  }
+
+  .menuButton:active {
+    scale: 0.9;
+  }
+
+  .menuOpen .menuButton {
+    background: var(--cl-sun);
+  }
+
+  .menuIcon {
+    position: relative;
+    width: 20px;
+    height: 12px;
+  }
+
+  .menuIcon span {
+    position: absolute;
+    left: 0;
     width: 100%;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 6px 10px 6px 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-    font-size: 14px;
-    white-space: nowrap;
+    height: 2.5px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  .menuIcon span:first-child {
+    top: 0;
+  }
+
+  .menuIcon span:last-child {
+    bottom: 0;
+  }
+
+  .menuOpen .menuIcon span:first-child {
+    transform: translateY(4.75px) rotate(45deg);
+  }
+
+  .menuOpen .menuIcon span:last-child {
+    transform: translateY(-4.75px) rotate(-45deg);
   }
 }

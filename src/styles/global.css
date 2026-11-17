@@ -56,7 +56,19 @@ canvas {
 
 @media (max-width: 720px) {
   html {
-    scroll-padding-top: 136px;
+    scroll-padding-top: calc(var(--phone-top-clearance) + 20px);
+  }
+
+  html.scrollLocked,
+  html.scrollLocked body {
+    overflow: hidden;
+    overscroll-behavior: none;
+  }
+
+  a,
+  button,
+  summary {
+    -webkit-tap-highlight-color: transparent;
   }
 }
 

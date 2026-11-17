@@ -155,22 +155,381 @@
   }
 }
 
-@media (max-width: 600px) {
+.creativeLabsMark {
+  display: flex;
+}
+
+.profileCharacter {
+  display: none;
+}
+
+@media (max-width: 720px) {
   .layout {
-    gap: 20px;
-    margin-top: 28px;
+    gap: 28px;
+    margin-top: 32px;
   }
 
   .profileCard,
   .organizerCard {
-    padding: 22px 20px;
+    box-shadow: none;
   }
 
-  .profileList {
-    padding-right: 48px;
+  .profileCard {
+    margin-inline: calc(var(--page-gutter) * -1);
+    padding: 30px var(--page-gutter) 26px;
+    border-inline: 0;
+    border-radius: 0;
+  }
+
+  .profileSun {
+    top: 14px;
+    right: -34px;
+    bottom: auto;
+    width: 168px;
+    height: 168px;
+    rotate: -8deg;
+    transition: scale 0.9s var(--ease-spring) 0.2s, rotate 0.9s var(--ease-spring) 0.2s, opacity 0.3s 0.2s;
+    animation: sunFloat 5.5s ease-in-out infinite;
+  }
+
+  .profileCard .cardTitle {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    transition: translate 0.8s var(--ease-smooth), opacity 0.5s var(--ease-smooth);
+  }
+
+  .titleLead {
+    padding: 5px 10px 4px;
+    border: 1px solid var(--cl-ink);
+    border-radius: 999px;
+    background: var(--cl-paper);
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .titleCount {
+    font-size: clamp(104px, 33vw, 136px);
+    line-height: 0.86;
+    letter-spacing: -0.045em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .profileCard .profileList {
+    counter-reset: profile;
+    flex-direction: row;
+    max-width: none;
+    margin-top: 10px;
+    --rail-item-width: 74%;
+    transition: translate 0.8s var(--ease-smooth);
+  }
+
+  .profileCard .profileList li {
+    counter-increment: profile;
+    position: relative;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 264px;
+    padding: 18px 18px 0;
+    border: 1px solid var(--cl-ink);
+    border-radius: var(--radius-card);
+    background: var(--cl-paper);
+    overflow: hidden;
+    font-weight: 900;
+    font-size: 23px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    transition: opacity 0.5s var(--ease-smooth), scale 0.25s var(--ease-smooth);
+  }
+
+  .profileCard .profileList li:nth-child(4n + 1) {
+    background: var(--cl-mint);
+  }
+
+  .profileCard .profileList li:nth-child(4n + 2) {
+    background: var(--cl-paper);
+    transition-delay: 0.08s, 0s;
+  }
+
+  .profileCard .profileList li:nth-child(4n + 3) {
+    background: var(--cl-lilac);
+    transition-delay: 0.16s, 0s;
+  }
+
+  .profileCard .profileList li:nth-child(4n + 4) {
+    background: var(--cl-sun);
+  }
+
+  .profileCard .profileList li:active {
+    scale: 0.97;
+  }
+
+  .profileCard .profileList li::before {
+    content: counter(profile, decimal-leading-zero);
+    width: auto;
+    height: auto;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0.06em;
+  }
+
+  .profileText {
+    position: relative;
+    z-index: 1;
+    text-wrap: balance;
+  }
+
+  .profileCharacter {
+    display: block;
+    position: absolute;
+    right: -6px;
+    bottom: -22px;
+    width: 128px;
+    height: 128px;
+    transform-origin: 50% 100%;
+    transform: translate3d(0, calc((1 - var(--rail-focus, 1)) * 46%), 0)
+      rotate(calc(-6deg + (1 - var(--rail-focus, 1)) * var(--rail-side, 0) * 22deg));
+  }
+
+  .profileCard .profileList li[data-rail-active='true'] .profileCharacter {
+    animation: characterWiggle 2.6s ease-in-out infinite;
+  }
+
+  .profileCard[data-in-view='false'] .cardTitle {
+    opacity: 0;
+    translate: 0 28px;
+  }
+
+  .profileCard[data-in-view='false'] .profileSun {
+    opacity: 0;
+    scale: 0.2;
+    rotate: -90deg;
+  }
+
+  .profileCard[data-in-view='false'] .profileList {
+    translate: 48px 0;
+  }
+
+  .profileCard[data-in-view='false'] .profileList li {
+    opacity: 0;
+  }
+
+  .organizerCard {
+    isolation: isolate;
+    padding: 28px 22px 22px;
+    transition: translate 0.8s var(--ease-smooth), opacity 0.5s var(--ease-smooth);
+  }
+
+  .organizerCard::before {
+    inset: -24% -45% auto auto;
+    width: 130%;
+    height: 62%;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgba(72, 107, 205, 0.6), transparent);
+    animation: glowDrift 9s ease-in-out infinite alternate;
+  }
+
+  .organizerCard::after {
+    content: '';
+    position: absolute;
+    inset: auto auto -22% -40%;
+    width: 110%;
+    height: 48%;
+    z-index: -1;
+    background: radial-gradient(closest-side, rgba(242, 116, 93, 0.3), transparent);
+    pointer-events: none;
+    animation: glowDrift 11s ease-in-out infinite alternate-reverse;
+  }
+
+  .organizerMarks {
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .devxMark {
+    width: 76px;
+    height: 76px;
+    margin: -8px;
+    transition: translate 0.9s var(--ease-spring) 0.15s, opacity 0.3s 0.15s;
+  }
+
+  .markCross {
+    font-size: 22px;
+    transition: rotate 0.9s var(--ease-spring) 0.35s, scale 0.9s var(--ease-spring) 0.35s, opacity 0.3s 0.35s;
+  }
+
+  .creativeLabsMark {
+    transition: translate 0.9s var(--ease-spring) 0.15s, opacity 0.3s 0.15s;
+  }
+
+  .creativeLabsMark svg {
+    width: 58px;
+    height: 58px;
+    animation: markWobble 6s ease-in-out infinite;
+  }
+
+  .organizerCard .cardTitle {
+    font-size: 32px;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .organizerBody {
+    margin-top: 14px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .shipped {
+    margin-top: 24px;
+    padding-top: 18px;
+  }
+
+  .shippedLabel {
+    letter-spacing: 0.02em;
+  }
+
+  .appList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .appList li {
+    transition: translate 0.7s var(--ease-spring), opacity 0.4s var(--ease-smooth);
+  }
+
+  .appList li:nth-child(2) {
+    transition-delay: 0.07s;
+  }
+
+  .appList li:nth-child(3) {
+    transition-delay: 0.14s;
+  }
+
+  .appList li:nth-child(4) {
+    transition-delay: 0.21s;
+  }
+
+  .appList li:nth-child(5) {
+    transition-delay: 0.28s;
+  }
+
+  .appList li:last-child {
+    grid-column: 1 / -1;
   }
 
   .app {
-    min-height: 44px;
+    display: flex;
+    gap: 10px;
+    min-height: 52px;
+    padding: 0 12px;
+    border: 1px solid var(--devx-line);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 15px;
+    color: var(--cl-paper);
+    transition: scale 0.25s var(--ease-smooth), background-color 0.25s, border-color 0.25s;
+  }
+
+  .appList li:last-child .app {
+    justify-content: center;
+    border-style: dashed;
+    background: none;
+  }
+
+  .app:active {
+    scale: 0.96;
+    border-color: var(--devx-blue);
+    background: rgba(67, 127, 254, 0.16);
+  }
+
+  .appIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+
+  .organizerCard[data-in-view='false'] {
+    opacity: 0;
+    translate: 0 36px;
+  }
+
+  .organizerCard[data-in-view='false'] .devxMark {
+    opacity: 0;
+    translate: -40px 0;
+  }
+
+  .organizerCard[data-in-view='false'] .creativeLabsMark {
+    opacity: 0;
+    translate: 40px 0;
+  }
+
+  .organizerCard[data-in-view='false'] .markCross {
+    opacity: 0;
+    scale: 0.2;
+    rotate: -180deg;
+  }
+
+  .organizerCard[data-in-view='false'] .appList li {
+    opacity: 0;
+    translate: 0 18px;
+  }
+
+  @keyframes sunFloat {
+    0%,
+    100% {
+      transform: none;
+    }
+    50% {
+      transform: translate3d(0, -8px, 0) rotate(5deg);
+    }
+  }
+
+  @keyframes characterWiggle {
+    0%,
+    100% {
+      transform: rotate(-6deg);
+    }
+    50% {
+      transform: translate3d(0, -6px, 0) rotate(5deg);
+    }
+  }
+
+  @keyframes glowDrift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-14%, 12%, 0) scale(1.18);
+    }
+  }
+
+  @keyframes markWobble {
+    0%,
+    100% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(14deg);
+    }
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .profileCharacter {
+    transform: rotate(-6deg);
   }
 }

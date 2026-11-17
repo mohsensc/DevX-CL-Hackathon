@@ -30,7 +30,7 @@ export function Countdown({ target }: { target: string }) {
     <div className={styles.countdown} role="timer" aria-label={`${weeks} weeks and ${days} days until kickoff`}>
       {remainingParts.map((value, index) => (
         <div key={unitLabels[index]} className={styles.unit} aria-hidden="true">
-          <span className={styles.value}>{String(value).padStart(2, '0')}</span>
+          <span key={value} className={styles.value}>{String(value).padStart(2, '0')}</span>
           <span className={styles.label}>{unitLabels[index]}</span>
         </div>
       ))}

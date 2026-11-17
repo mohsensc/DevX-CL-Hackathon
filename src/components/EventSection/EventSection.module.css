@@ -31,21 +31,208 @@
   line-height: 1.35;
 }
 
-@media (max-width: 600px) {
-  .fact {
-    padding: 18px 8px 22px 0;
+.factCharacter {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 28px;
+    border: 0;
   }
 
+  .fact,
   .fact + .fact {
-    padding-left: 10px;
+    position: relative;
+    justify-content: flex-end;
+    gap: 8px;
+    min-height: 176px;
+    padding: 16px;
+    border: 1px solid var(--cl-ink);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--cl-sun);
+    transition:
+      transform 0.9s var(--ease-spring) calc(var(--fact-index) * 130ms),
+      opacity 0.4s var(--ease-smooth) calc(var(--fact-index) * 130ms),
+      scale 0.25s var(--ease-smooth);
+  }
+
+  .fact:active {
+    scale: 0.97;
+  }
+
+  .fact:nth-child(2) {
+    transform: rotate(-1.4deg);
+  }
+
+  .fact:nth-child(3) {
+    background: var(--cl-sky);
+    transform: rotate(1.4deg);
+  }
+
+  .facts[data-in-view='false'] .fact {
+    opacity: 0;
+    transform: translate3d(0, 44px, 0) rotate(-5deg);
+  }
+
+  .facts[data-in-view='false'] .fact:nth-child(3) {
+    transform: translate3d(0, 44px, 0) rotate(5deg);
+  }
+
+  .fact:first-child {
+    grid-column: 1 / -1;
+    min-height: 212px;
+    padding: 20px;
+    background: var(--devx-night);
+    color: var(--cl-paper);
+  }
+
+  .fact:first-child::before,
+  .fact:first-child::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .fact:first-child::before {
+    right: -110px;
+    bottom: -150px;
+    background: radial-gradient(circle, rgba(67, 127, 254, 0.75), rgba(67, 127, 254, 0) 68%);
+    animation: glowDrift 7s ease-in-out infinite alternate;
+  }
+
+  .fact:first-child::after {
+    left: -150px;
+    top: -190px;
+    background: radial-gradient(circle, rgba(242, 116, 93, 0.6), rgba(242, 116, 93, 0) 68%);
+    animation: glowDrift 9s ease-in-out -3s infinite alternate-reverse;
+  }
+
+  .factValue,
+  .factLabel {
+    position: relative;
+    z-index: 1;
   }
 
   .factValue {
-    font-size: clamp(22px, 6.2vw, 56px);
-    white-space: nowrap;
+    position: static;
+    font-size: clamp(50px, 15.5vw, 66px);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .factFigure {
+    position: relative;
+    z-index: 1;
+  }
+
+  .fact:first-child .factValue {
+    font-size: clamp(104px, 31vw, 132px);
+  }
+
+  .factUnit {
+    position: relative;
+    z-index: 1;
+    display: block;
+    margin-top: 6px;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: 0;
   }
 
   .factLabel {
-    font-size: 13px;
+    max-width: 11ch;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .fact:first-child .factLabel {
+    max-width: none;
+    font-size: 18px;
+  }
+
+  .factCharacter {
+    display: block;
+    position: absolute;
+    right: -14px;
+    top: -18px;
+    width: 84px;
+    height: 84px;
+    rotate: 14deg;
+    transition: transform 0.5s var(--ease-spring);
+    animation:
+      factCharacterHello 0.9s var(--ease-spring) calc(var(--fact-index) * 130ms + 250ms) backwards,
+      factCharacterFloat 4.6s ease-in-out calc(var(--fact-index) * 400ms + 1200ms) infinite;
+  }
+
+  .fact:first-child .factCharacter {
+    right: 6px;
+    top: 8px;
+    width: 128px;
+    height: 128px;
+  }
+
+  .fact:nth-child(2) .factCharacter {
+    right: -16px;
+    top: auto;
+    bottom: -6px;
+    width: 76px;
+    height: 76px;
+    rotate: -6deg;
+  }
+
+  .fact:nth-child(3) .factCharacter {
+    right: -20px;
+    top: -22px;
+    rotate: 16deg;
+  }
+
+  .fact:active .factCharacter {
+    transform: scale(1.12) rotate(-10deg);
+  }
+
+  .facts[data-in-view='false'] .factCharacter {
+    opacity: 0;
+    animation: none;
+  }
+
+  @keyframes factCharacterHello {
+    from {
+      opacity: 0;
+      translate: 40px -40px;
+      scale: 0.4;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
+    }
+  }
+
+  @keyframes factCharacterFloat {
+    0%,
+    100% {
+      translate: 0 0;
+    }
+    50% {
+      translate: 0 -7px;
+    }
+  }
+
+  @keyframes glowDrift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-36px, -24px, 0) scale(1.18);
+    }
   }
 }

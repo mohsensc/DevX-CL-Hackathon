@@ -125,23 +125,192 @@
   }
 }
 
-@media (max-width: 600px) {
+.founderMark {
+  display: none;
+}
+
+@media (max-width: 720px) {
   .band {
-    padding-top: 48px;
+    position: relative;
+    isolation: isolate;
+    padding-top: 52px;
+  }
+
+  .band::before,
+  .band::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  .band::before {
+    inset: -8% -50% auto auto;
+    width: 130%;
+    height: 46%;
+    background: radial-gradient(closest-side, rgba(72, 107, 205, 0.42), transparent);
+    animation: bandGlowDrift 10s ease-in-out infinite alternate;
+  }
+
+  .band::after {
+    inset: auto auto 4% -55%;
+    width: 120%;
+    height: 40%;
+    background: radial-gradient(closest-side, rgba(242, 116, 93, 0.24), transparent);
+    animation: bandGlowDrift 13s ease-in-out infinite alternate-reverse;
   }
 
   .header {
-    margin-bottom: 28px;
+    align-items: stretch;
+    gap: 24px;
+    margin-bottom: 8px;
+    text-align: left;
   }
 
+  .title {
+    font-size: clamp(34px, 9.8vw, 42px);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    transition: translate 0.8s var(--ease-smooth), opacity 0.5s var(--ease-smooth);
+  }
+
+  .founder {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 18px;
+    border: 1px solid var(--devx-line);
+    border-radius: var(--radius-card);
+    background: rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #d6d7dc;
+    transition: translate 0.8s var(--ease-smooth) 0.12s, opacity 0.5s var(--ease-smooth) 0.12s;
+  }
+
+  .founder::before {
+    content: '';
+    position: absolute;
+    inset: -60% -30% auto auto;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(closest-side, rgba(242, 116, 93, 0.32), transparent);
+    pointer-events: none;
+    animation: bandGlowDrift 8s ease-in-out infinite alternate;
+  }
+
+  .founderMark {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--devx-line);
+  }
+
+  .founderLogo {
+    width: auto;
+    height: clamp(28px, 8.4vw, 34px);
+    transition: translate 0.8s var(--ease-spring) 0.3s, opacity 0.3s 0.3s;
+  }
+
+  .founderTag {
+    padding: 7px 11px;
+    border-radius: 6px;
+    background: var(--devx-ember);
+    color: var(--cl-ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    white-space: nowrap;
+    rotate: 4deg;
+    transition: scale 0.8s var(--ease-spring) 0.5s, rotate 0.8s var(--ease-spring) 0.5s, opacity 0.2s 0.5s;
+    animation: tagPulse 2.8s ease-in-out 1.6s infinite;
+  }
+
+  .founderText {
+    position: relative;
+  }
+
+  .header[data-in-view='false'] .title,
+  .header[data-in-view='false'] .founder {
+    opacity: 0;
+    translate: 0 28px;
+  }
+
+  .header[data-in-view='false'] .founderLogo {
+    opacity: 0;
+    translate: -32px 0;
+  }
+
+  .header[data-in-view='false'] .founderTag {
+    opacity: 0;
+    scale: 0.2;
+    rotate: -30deg;
+  }
 
   .viewport {
-    gap: 32px;
-    padding: 32px 0 40px;
+    gap: 34px;
+    padding: 44px 0 56px;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .track {
+    animation-duration: 46s;
+    translate: calc((var(--band-progress, 1) - 1) * 150px) 0;
+    transition: opacity 0.7s var(--ease-smooth) calc(var(--row-index, 0) * 0.14s),
+      scale 0.9s var(--ease-smooth) calc(var(--row-index, 0) * 0.14s);
+  }
+
+  .trackReverse {
+    animation-duration: 54s;
+    translate: calc(var(--band-progress, 0) * -150px) 0;
+  }
+
+  .track:nth-child(3) {
+    animation-duration: 40s;
+  }
+
+  .viewport[data-in-view='false'] .track {
+    opacity: 0;
+    scale: 0.9;
   }
 
   .logoGroup {
-    gap: 64px;
-    padding-right: 64px;
+    gap: 56px;
+    padding-right: 56px;
+  }
+
+  .logoItem {
+    transition: scale 0.3s var(--ease-smooth);
+  }
+
+  .logoItem:active {
+    scale: 1.1;
+  }
+
+  @keyframes bandGlowDrift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-12%, 10%, 0) scale(1.2);
+    }
+  }
+
+  @keyframes tagPulse {
+    0%,
+    100% {
+      transform: none;
+    }
+    50% {
+      transform: scale(1.1) rotate(-5deg);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
 import { eventDetails, inquiryInterests } from '../../content/event'
+import { InterestPicker } from './InterestPicker'
 import styles from './InquiryForm.module.css'
 
 const emptyInquiry = { fullName: '', company: '', email: '', interest: inquiryInterests[0], message: '', website: '' }
@@ -56,6 +57,8 @@ export function InquiryForm() {
             className={styles.input}
             required
             autoComplete="name"
+            autoCapitalize="words"
+            enterKeyHint="next"
             value={inquiry.fullName}
             onChange={(event) => updateField('fullName', event.target.value)}
           />
@@ -66,6 +69,7 @@ export function InquiryForm() {
             className={styles.input}
             required
             autoComplete="organization"
+            enterKeyHint="next"
             value={inquiry.company}
             onChange={(event) => updateField('company', event.target.value)}
           />
@@ -79,28 +83,23 @@ export function InquiryForm() {
             type="email"
             required
             autoComplete="email"
+            inputMode="email"
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            enterKeyHint="next"
             value={inquiry.email}
             onChange={(event) => updateField('email', event.target.value)}
           />
         </label>
-        <label className={styles.field}>
-          <span className={styles.label}>Interested in</span>
-          <select
-            className={styles.input}
-            value={inquiry.interest}
-            onChange={(event) => updateField('interest', event.target.value)}
-          >
-            {inquiryInterests.map((interest) => (
-              <option key={interest}>{interest}</option>
-            ))}
-          </select>
-        </label>
+        <InterestPicker selectedInterest={inquiry.interest} onSelect={(interest) => updateField('interest', interest)} />
       </div>
       <label className={styles.field}>
         <span className={styles.label}>What does your team want out of the weekend?</span>
         <textarea
           className={`${styles.input} ${styles.message}`}
           rows={4}
+          enterKeyHint="enter"
           value={inquiry.message}
           onChange={(event) => updateField('message', event.target.value)}
         />
@@ -121,6 +120,9 @@ export function InquiryForm() {
         ) : (
           <button type="submit" className={styles.submitButton} disabled={submitStatus === 'sending'}>
             {submitStatus === 'sending' ? 'Sending' : 'Send'}
+            <span className={styles.submitArrow} aria-hidden="true">
+              ➔
+            </span>
           </button>
         )}
       </div>

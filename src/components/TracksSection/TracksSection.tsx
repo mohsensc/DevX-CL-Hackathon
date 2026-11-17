@@ -1,7 +1,30 @@
 import { tracks, ycRfsUrl } from '../../content/event'
 import { Card } from '../Card/Card'
+import { Rail } from '../Rail/Rail'
 import { Section } from '../Section/Section'
 import styles from './TracksSection.module.css'
+
+function formatTrackNumber(trackIndex: number) {
+  return String(trackIndex + 1).padStart(2, '0')
+}
+
+function TrackSources({ sources }: { sources: string[] }) {
+  return (
+    <>
+      <p className={styles.sources}>From: {sources.join(', ')}</p>
+      <div className={styles.sourceBlock}>
+        <span className={styles.sourceLabel}>From</span>
+        <ul className={styles.sourceList}>
+          {sources.map((source) => (
+            <li key={source} className={styles.sourceItem}>
+              {source}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
+  )
+}
 
 export function TracksSection() {
   return (
@@ -18,14 +41,21 @@ export function TracksSection() {
         </p>
       }
     >
-      <div className={styles.grid}>
-        {tracks.map((track) => (
-          <Card key={track.name} tint={track.tint} character={track.character} title={track.name} compactOnMobile>
+      <Rail label="Tracks" className={styles.grid}>
+        {tracks.map((track, trackIndex) => (
+          <Card
+            key={track.name}
+            tint={track.tint}
+            character={track.character}
+            title={track.name}
+            badge={<span className={styles.trackNumber}>{formatTrackNumber(trackIndex)}</span>}
+            className={styles.trackCard}
+          >
             <p>{track.description}</p>
-            <p className={styles.sources}>From: {track.sources.join(', ')}</p>
+            <TrackSources sources={track.sources} />
           </Card>
         ))}
-      </div>
+      </Rail>
     </Section>
   )
 }

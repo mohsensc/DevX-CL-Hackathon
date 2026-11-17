@@ -72,27 +72,161 @@
   }
 }
 
-@media (max-width: 600px) {
+.creditNumber {
+  display: none;
+}
+
+@media (max-width: 720px) {
   .creditCard {
-    padding: 20px;
+    gap: 18px;
+    margin-top: 64px;
+    padding: 20px 16px 16px;
+    box-shadow: none;
+    transition: transform 0.8s var(--ease-smooth), opacity 0.5s var(--ease-smooth);
+  }
+
+  .creditCard[data-in-view='false'] {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
   }
 
   .creditCopy {
     padding-bottom: 0;
-    padding-right: 72px;
+  }
+
+  .creditLead {
+    padding-right: 88px;
+    font-size: clamp(27px, 7.6vw, 32px);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+  }
+
+  .creditBody {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 1.45;
   }
 
   .creditCharacter {
     left: auto;
-    right: -6px;
-    top: 0;
+    right: -24px;
+    top: -84px;
     bottom: auto;
-    width: 64px;
-    height: 64px;
+    width: 136px;
+    height: 136px;
+    rotate: 12deg;
+    transition: transform 0.5s var(--ease-spring);
+    animation:
+      pillHello 1s var(--ease-spring) 0.25s backwards,
+      pillFloat 4.4s ease-in-out 1.3s infinite;
   }
 
-  .creditBody,
+  .creditCard[data-in-view='false'] .creditCharacter {
+    opacity: 0;
+    animation: none;
+  }
+
+  .creditCard:active .creditCharacter {
+    transform: rotate(-20deg) scale(1.1);
+  }
+
+  .creditList {
+    gap: 0;
+    border: 1px solid var(--cl-ink);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--cl-paper);
+  }
+
+  .creditItem {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    column-gap: 12px;
+    align-items: center;
+    min-height: 68px;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 0;
+    background: var(--cl-paper);
+    transition:
+      transform 0.7s var(--ease-smooth) calc(var(--option-index) * 110ms + 250ms),
+      opacity 0.4s var(--ease-smooth) calc(var(--option-index) * 110ms + 250ms),
+      background-color 0.2s;
+  }
+
+  .creditItem + .creditItem {
+    border-top: 1px solid var(--cl-ink);
+  }
+
+  .creditItem:active {
+    background: var(--cl-sky);
+  }
+
+  .creditCard[data-in-view='false'] .creditItem {
+    opacity: 0;
+    transform: translate3d(40px, 0, 0);
+  }
+
+  .creditNumber {
+    display: grid;
+    place-items: center;
+    grid-row: 1 / span 2;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--cl-ink);
+    border-radius: 50%;
+    background: var(--cl-sun);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1;
+    transition: transform 0.7s var(--ease-spring) calc(var(--option-index) * 110ms + 450ms);
+  }
+
+  .creditCard[data-in-view='false'] .creditNumber {
+    transform: scale(0) rotate(-90deg);
+  }
+
+  .creditItem:active .creditNumber {
+    transform: rotate(-12deg) scale(1.12);
+    transition-delay: 0s;
+  }
+
+  .creditTitle {
+    align-self: end;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
   .creditDetail {
-    font-size: 16px;
+    align-self: start;
+    margin-top: 2px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  @keyframes pillHello {
+    from {
+      opacity: 0;
+      translate: 0 90px;
+      rotate: -40deg;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      rotate: 12deg;
+    }
+  }
+
+  @keyframes pillFloat {
+    0%,
+    100% {
+      translate: 0 0;
+      rotate: 12deg;
+    }
+    50% {
+      translate: 0 -8px;
+      rotate: 6deg;
+    }
   }
 }

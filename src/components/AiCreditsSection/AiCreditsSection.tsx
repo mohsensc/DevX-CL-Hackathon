@@ -1,12 +1,22 @@
+import { useRef } from 'react'
+import type { CSSProperties } from 'react'
 import { creditOptions } from '../../content/event'
+import { useInView } from '../../hooks/useInView'
 import { Character } from '../Character/Character'
 import { Section } from '../Section/Section'
 import styles from './AiCreditsSection.module.css'
 
+function formatOptionNumber(optionIndex: number) {
+  return String(optionIndex + 1).padStart(2, '0')
+}
+
 export function AiCreditsSection() {
+  const creditCardRef = useRef<HTMLDivElement>(null)
+  const isCreditCardInView = useInView(creditCardRef)
+
   return (
     <Section id="credits" heading="Sponsor With AI Credits">
-      <div className={styles.creditCard}>
+      <div ref={creditCardRef} className={styles.creditCard} data-in-view={isCreditCardInView}>
         <div className={styles.creditCopy}>
           <p className={styles.creditLead}>Send API credits for our 250 builders.</p>
           <p className={styles.creditBody}>
@@ -16,8 +26,15 @@ export function AiCreditsSection() {
           <Character kind="pill" size={96} className={styles.creditCharacter} />
         </div>
         <ul className={styles.creditList}>
-          {creditOptions.map((option) => (
-            <li key={option.title} className={styles.creditItem}>
+          {creditOptions.map((option, optionIndex) => (
+            <li
+              key={option.title}
+              className={styles.creditItem}
+              style={{ '--option-index': optionIndex } as CSSProperties}
+            >
+              <span className={styles.creditNumber} aria-hidden="true">
+                {formatOptionNumber(optionIndex)}
+              </span>
               <h3 className={styles.creditTitle}>{option.title}</h3>
               <p className={styles.creditDetail}>{option.body}</p>
             </li>

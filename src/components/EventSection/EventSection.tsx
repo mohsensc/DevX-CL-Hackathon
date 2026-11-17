@@ -1,8 +1,52 @@
+import { useRef } from 'react'
+import type { CSSProperties } from 'react'
 import { eventFacts } from '../../content/event'
+import type { CharacterKind } from '../../content/event'
+import { useCountUp } from '../../hooks/useCountUp'
+import { useInView } from '../../hooks/useInView'
+import { useIsPhone } from '../../hooks/useIsPhone'
+import { Character } from '../Character/Character'
 import { Section } from '../Section/Section'
 import styles from './EventSection.module.css'
 
+const factCharacters: CharacterKind[] = ['star', 'bubble', 'triangle']
+const factStaggerMs = 130
+
+type FactFigureProps = {
+  value: string
+  isCounting: boolean
+  delay: number
+}
+
+function splitFactValue(value: string) {
+  const [, digits = '', suffix = '', unit = ''] = value.match(/^(\d+)(\S*)\s*(.*)$/) ?? []
+  return { target: Number(digits), suffix, unit }
+}
+
+function FactFigure({ value, isCounting, delay }: FactFigureProps) {
+  const figureRef = useRef<HTMLSpanElement>(null)
+  const { target, suffix, unit } = splitFactValue(value)
+  useCountUp(figureRef, { target, suffix, isActive: isCounting, delay })
+  return (
+    <>
+      <span ref={figureRef} className={styles.factFigure}>
+        {`${target}${suffix}`}
+      </span>
+      {unit && (
+        <>
+          {' '}
+          <span className={styles.factUnit}>{unit}</span>
+        </>
+      )}
+    </>
+  )
+}
+
 export function EventSection() {
+  const factsRef = useRef<HTMLDListElement>(null)
+  const areFactsInView = useInView(factsRef)
+  const isPhone = useIsPhone()
+
   return (
     <Section
       id="event"
@@ -15,10 +59,17 @@ export function EventSection() {
         </p>
       }
     >
-      <dl className={styles.facts}>
-        {eventFacts.map((fact) => (
-          <div key={fact.label} className={styles.fact}>
-            <dt className={styles.factValue}>{fact.value}</dt>
+      <dl ref={factsRef} className={styles.facts} data-in-view={areFactsInView}>
+        {eventFacts.map((fact, factIndex) => (
+          <div key={fact.label} className={styles.fact} style={{ '--fact-index': factIndex } as CSSProperties}>
+            <dt className={styles.factValue}>
+              <FactFigure
+                value={fact.value}
+                isCounting={isPhone && areFactsInView}
+                delay={factIndex * factStaggerMs + 200}
+              />
+              <Character kind={factCharacters[factIndex % factCharacters.length]} size={96} className={styles.factCharacter} />
+            </dt>
             <dd className={styles.factLabel}>{fact.label}</dd>
           </div>
         ))}

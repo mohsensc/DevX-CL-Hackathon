@@ -101,7 +101,7 @@
   .contact::after {
     content: '';
     position: absolute;
-    inset: -6% 20% auto -50%;
+    inset: 5% 20% auto -50%;
     height: 46%;
     z-index: -1;
     background: radial-gradient(closest-side, rgba(242, 116, 93, 0.26), transparent);

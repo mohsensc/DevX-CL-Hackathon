@@ -260,57 +260,7 @@
   }
 
   .freeForBuilders {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
-    margin-top: 28px;
-    padding: 18px 18px 16px;
-    transition: transform 0.8s var(--ease-smooth), opacity 0.5s var(--ease-smooth);
-  }
-
-  .freeForBuilders[data-in-view='false'] {
-    opacity: 0;
-    transform: translate3d(0, 32px, 0);
-  }
-
-  .freeForBuilders ul.covers {
-    flex-wrap: nowrap;
-    gap: 8px;
-    scroll-snap-type: x proximity;
-    --rail-bleed: 18px;
-    --rail-padding-block: 0px;
-    --rail-item-width: auto;
-  }
-
-  .covers li {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-    padding: 8px 16px;
-    font-size: 15px;
-    transition: transform 0.7s var(--ease-spring), opacity 0.3s;
-    transition-delay: calc(var(--cover-order, 0) * 70ms + 300ms);
-  }
-
-  .covers li:nth-child(2) {
-    --cover-order: 1;
-  }
-
-  .covers li:nth-child(3) {
-    --cover-order: 2;
-  }
-
-  .covers li:nth-child(4) {
-    --cover-order: 3;
-  }
-
-  .covers li:nth-child(5) {
-    --cover-order: 4;
-  }
-
-  .freeForBuilders[data-in-view='false'] .covers li {
-    opacity: 0;
-    transform: translate3d(40px, 0, 0) rotate(6deg);
+    display: none;
   }
 
   .reasonsGroup {
@@ -400,8 +350,6 @@
 
   .perks li,
   .perks li::before,
-  .covers li,
-  .freeForBuilders,
   .subheading,
   .reasonIndex {
     transition: none;

@@ -1,5 +1,5 @@
-import { Children, createElement, useEffect, useRef, useState } from 'react'
-import type { CSSProperties, ReactNode } from 'react'
+import { Children, createElement, useEffect, useRef } from 'react'
+import type { ReactNode } from 'react'
 import { useIsPhone } from '../../hooks/useIsPhone'
 import styles from './Rail.module.css'
 
@@ -9,16 +9,6 @@ type RailProps = {
   className?: string
   as?: 'div' | 'ul' | 'ol' | 'dl'
   motion?: 'tilt' | 'none'
-  hasIndicator?: boolean
-}
-
-type RailPosition = {
-  activeIndex: number
-  isScrollable: boolean
-}
-
-function formatCount(value: number) {
-  return String(value).padStart(2, '0')
 }
 
 function measureItemFocus(track: HTMLElement, item: HTMLElement) {
@@ -32,24 +22,14 @@ function measureItemFocus(track: HTMLElement, item: HTMLElement) {
   return { focus, side }
 }
 
-export function Rail({
-  children,
-  label,
-  className,
-  as: trackTag = 'div',
-  motion = 'tilt',
-  hasIndicator = true,
-}: RailProps) {
-  const railRef = useRef<HTMLDivElement>(null)
+export function Rail({ children, label, className, as: trackTag = 'div', motion = 'tilt' }: RailProps) {
   const trackRef = useRef<HTMLElement>(null)
   const isPhone = useIsPhone()
   const itemCount = Children.count(children)
-  const [position, setPosition] = useState<RailPosition>({ activeIndex: 0, isScrollable: false })
 
   useEffect(() => {
-    const rail = railRef.current
     const track = trackRef.current
-    if (!isPhone || !rail || !track) return
+    if (!isPhone || !track) return
 
     const items = Array.from(track.children) as HTMLElement[]
     let animationFrame = 0
@@ -75,13 +55,6 @@ export function Rail({
         const activeValue = String(itemIndex === activeIndex)
         if (item.dataset.railActive !== activeValue) item.dataset.railActive = activeValue
       })
-
-      rail!.style.setProperty('--rail-progress', scrollRange > 0 ? (track!.scrollLeft / scrollRange).toFixed(4) : '0')
-      setPosition((previous) =>
-        previous.activeIndex === activeIndex && previous.isScrollable === scrollRange > 0
-          ? previous
-          : { activeIndex, isScrollable: scrollRange > 0 },
-      )
     }
 
     function requestSync() {
@@ -97,7 +70,6 @@ export function Rail({
       cancelAnimationFrame(animationFrame)
       track.removeEventListener('scroll', requestSync)
       resizeObserver.disconnect()
-      rail.style.removeProperty('--rail-progress')
       items.forEach((item) => {
         item.style.removeProperty('--rail-focus')
         item.style.removeProperty('--rail-side')
@@ -107,10 +79,9 @@ export function Rail({
   }, [isPhone, itemCount])
 
   const trackClassName = [styles.track, motion === 'tilt' && styles.tilt, className].filter(Boolean).join(' ')
-  const railStyle = { '--rail-count': itemCount } as CSSProperties
 
   return (
-    <div ref={railRef} className={styles.rail} style={railStyle}>
+    <div className={styles.rail}>
       {createElement(
         trackTag,
         {
@@ -121,19 +92,6 @@ export function Rail({
           'aria-label': label,
         },
         children,
-      )}
-      {hasIndicator && position.isScrollable && (
-        <div className={styles.indicator} aria-hidden="true">
-          <span className={styles.progress}>
-            <span className={styles.thumb} />
-          </span>
-          <span className={styles.count}>
-            <span className={styles.countCurrent} key={position.activeIndex}>
-              {formatCount(position.activeIndex + 1)}
-            </span>
-            <span className={styles.countTotal}>/ {formatCount(itemCount)}</span>
-          </span>
-        </div>
       )}
     </div>
   )

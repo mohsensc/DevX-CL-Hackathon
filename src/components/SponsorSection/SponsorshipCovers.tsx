@@ -11,7 +11,7 @@ export function SponsorshipCovers() {
   return (
     <div ref={panelRef} className={styles.freeForBuilders} data-in-view={isInView}>
       <p className={styles.coversLabel}>Sponsors cover</p>
-      <Rail as="ul" label="What sponsorship covers" className={styles.covers} motion="none" hasIndicator={false}>
+      <Rail as="ul" label="What sponsorship covers" className={styles.covers} motion="none">
         {sponsorshipCovers.map((item) => (
           <li key={item}>{item}</li>
         ))}

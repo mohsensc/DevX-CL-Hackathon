@@ -56,6 +56,7 @@ canvas {
 
 @media (max-width: 720px) {
   html {
+    overscroll-behavior-y: none;
     scroll-padding-top: calc(var(--phone-top-clearance) + 20px);
   }
 

@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import { phoneMediaQuery } from '../../hooks/useIsPhone'
 import styles from './Smiley.module.css'
 
 type SmileyProps = {
@@ -11,6 +10,7 @@ type SmileyProps = {
 const sunSize = 224
 const centeredFace = { left: 70, top: 97 }
 const restingOffset = { x: 97 - centeredFace.left, y: 68 - centeredFace.top }
+const faceSize = { width: 88, height: 30 }
 const maxFaceTravel = 55
 const followSpeed = 14
 const wanderSpeed = 3.2
@@ -19,6 +19,10 @@ const wanderPauseAfterTouchMs = 1800
 
 function toPercent(value: number) {
   return `${(value / sunSize) * 100}%`
+}
+
+function faceTransform(offset: { x: number; y: number }) {
+  return `translate3d(${(offset.x / faceSize.width) * 100}%, ${(offset.y / faceSize.height) * 100}%, 0)`
 }
 
 export function Smiley({ size = 224, className, isActive = true }: SmileyProps) {
@@ -39,9 +43,7 @@ export function Smiley({ size = 224, className, isActive = true }: SmileyProps) 
     let isOnScreen = true
 
     function renderFace() {
-      const sunWidth = matchMedia(phoneMediaQuery).matches ? sun!.offsetWidth : sun!.getBoundingClientRect().width
-      const scale = sunWidth / sunSize
-      face!.style.transform = `translate3d(${current.x * scale}px, ${current.y * scale}px, 0)`
+      face!.style.transform = faceTransform(current)
     }
 
     renderFace()
@@ -98,13 +100,11 @@ export function Smiley({ size = 224, className, isActive = true }: SmileyProps) 
     if (isTouchDevice) visibilityObserver.observe(sun)
 
     window.addEventListener('pointermove', handlePointerMove, { passive: true })
-    window.addEventListener('resize', renderFace)
     return () => {
       cancelAnimationFrame(animationFrame)
       window.clearInterval(wanderInterval)
       visibilityObserver.disconnect()
       window.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('resize', renderFace)
     }
   }, [isActive])
 
@@ -114,8 +114,12 @@ export function Smiley({ size = 224, className, isActive = true }: SmileyProps) 
       <svg
         ref={faceRef}
         className={styles.face}
-        style={{ left: toPercent(centeredFace.left), top: toPercent(centeredFace.top) }}
-        viewBox="0 0 88 30"
+        style={{
+          left: toPercent(centeredFace.left),
+          top: toPercent(centeredFace.top),
+          transform: faceTransform(restingOffset),
+        }}
+        viewBox={`0 0 ${faceSize.width} ${faceSize.height}`}
         fill="none"
       >
         <g className={styles.eyes}>

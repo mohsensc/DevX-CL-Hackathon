@@ -6,6 +6,7 @@ import { PhoneMenu } from '../PhoneMenu/PhoneMenu'
 import styles from './Nav.module.css'
 
 const navLinks = [
+  { href: '#top', label: 'Home' },
   { href: '#event', label: 'Event' },
   { href: '#packages', label: 'Packages' },
   { href: '#credits', label: 'AI Credits' },

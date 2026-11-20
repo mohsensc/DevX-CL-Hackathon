@@ -198,10 +198,10 @@ export const weekendSchedule = [
     items: [
       { time: '7:30 AM', label: 'Breakfast' },
       { time: '8:00 AM', label: 'YC application clinic' },
-      { time: '9:00 AM', label: 'Code freeze, apps submitted' },
-      { time: '10:30 AM', label: 'Expo judging' },
-      { time: '12:30 PM', label: 'Top 8 pitch on stage' },
-      { time: '2:00 PM', label: 'Awards' },
+      { time: '2:00 PM', label: 'Code freeze, apps submitted' },
+      { time: '2:30 PM', label: 'Expo judging' },
+      { time: '4:00 PM', label: 'Top 8 pitch on stage' },
+      { time: '5:00 PM', label: 'Awards' },
     ],
   },
 ]

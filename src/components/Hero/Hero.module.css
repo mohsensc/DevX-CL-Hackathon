@@ -203,6 +203,8 @@
       radial-gradient(60% 26% at 0% 34%, rgba(72, 107, 205, 0.3), transparent 70%),
       radial-gradient(80% 30% at 100% 96%, rgba(67, 127, 254, 0.28), transparent 72%),
       radial-gradient(50% 18% at 12% 100%, rgba(242, 116, 93, 0.3), transparent 72%);
+    mask-image: linear-gradient(to bottom, #000 calc(100% - 140px), transparent);
+    -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 140px), transparent);
     animation: glowBreathe 7s ease-in-out infinite alternate;
   }
 

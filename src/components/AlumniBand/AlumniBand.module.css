@@ -145,7 +145,7 @@
   }
 
   .band::before {
-    inset: -8% -50% auto auto;
+    inset: 5% -50% auto auto;
     width: 130%;
     height: 46%;
     background: radial-gradient(closest-side, rgba(72, 107, 205, 0.42), transparent);
@@ -263,14 +263,12 @@
 
   .track {
     animation-duration: 46s;
-    translate: calc((var(--band-progress, 1) - 1) * 150px) 0;
     transition: opacity 0.7s var(--ease-smooth) calc(var(--row-index, 0) * 0.14s),
       scale 0.9s var(--ease-smooth) calc(var(--row-index, 0) * 0.14s);
   }
 
   .trackReverse {
     animation-duration: 54s;
-    translate: calc(var(--band-progress, 0) * -150px) 0;
   }
 
   .track:nth-child(3) {

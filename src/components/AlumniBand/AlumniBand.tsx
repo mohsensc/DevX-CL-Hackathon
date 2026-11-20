@@ -3,7 +3,6 @@ import type { CSSProperties } from 'react'
 import { memberCompanies, ycFounderAlum } from '../../content/event'
 import { useInView } from '../../hooks/useInView'
 import { useIsPhone } from '../../hooks/useIsPhone'
-import { useScrollProgress } from './useScrollProgress'
 import styles from './AlumniBand.module.css'
 
 type MemberCompany = (typeof memberCompanies)[number]
@@ -53,7 +52,6 @@ export function AlumniBand() {
   const isHeaderInView = useInView(headerRef)
   const isViewportInView = useInView(viewportRef)
   const logoRows = useMemo(() => splitIntoRows(isPhone ? phoneRowCount : desktopRowCount), [isPhone])
-  useScrollProgress(viewportRef, isPhone, '--band-progress')
 
   return (
     <section className={styles.band} aria-labelledby="alumni-heading">
